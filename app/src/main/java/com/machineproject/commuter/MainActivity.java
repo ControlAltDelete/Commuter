@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText emailView;
     private EditText pWordView;
+    private TextView loginStatus;
 
     private Button submit;
 
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        loginStatus = (TextView) findViewById(R.id.login_status);
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -86,18 +89,20 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        TextView register = (Button) findViewById(R.id.register_account);
+        Button register = (Button) findViewById(R.id.register_account);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent register = new Intent();
                 register.setClass(getBaseContext(), Register.class);
                 startActivity(register);
+                loginStatus.setText("");
             }
         });
 
         emailView = (EditText) findViewById(R.id.email_login);
         pWordView = (EditText) findViewById(R.id.password_login);
+
         submit = (Button) findViewById(R.id.login);
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
-                Toast.makeText(getBaseContext(), "Logging in", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), "Logging in", Toast.LENGTH_SHORT).show();
                 try {
 
                     mAuth.signInWithEmailAndPassword(emailView.getText().toString(), pWordView.getText().toString()).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
@@ -116,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                             if (!task.isSuccessful()) {
-                                Toast.makeText(getBaseContext(), "Failed signing in", Toast.LENGTH_SHORT).show();
+                                loginStatus.setText("Failed signing in. Invalid username or password.");
                             } else {
                             }
                         }
@@ -125,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
                 catch (Exception ex)
                 {
-                    Toast.makeText(getBaseContext(), "Something went wrong.", Toast.LENGTH_LONG).show();
+                    loginStatus.setText("Username or password cannot be empty.");
                 }
             }
         });

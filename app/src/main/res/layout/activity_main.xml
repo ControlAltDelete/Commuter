@@ -39,11 +39,19 @@
         android:id="@+id/password_login"
         android:layout_below="@id/email_login"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password_login"
+        android:textColor="#F44336"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/login_status"
+        />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/password_login"
+        android:layout_below="@id/login_status"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp">
 
