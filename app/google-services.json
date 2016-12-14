@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "807537382321",
+    "firebase_url": "https://commuter-84d6c.firebaseio.com",
+    "project_id": "commuter-84d6c",
+    "storage_bucket": "commuter-84d6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807537382321:android:d1cb5b380758e98e",
+        "android_client_info": {
+          "package_name": "com.machineproject.commuter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807537382321-6onnu7vkqobd035a7tm0ieln1mo1ssq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjMprgo81SyXrB_dLMDgljTAjsx_wmOlI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
