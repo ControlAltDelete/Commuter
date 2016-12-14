@@ -87,7 +87,7 @@ public class MarkerController extends AsyncTask<Void, Void, Void> {
 
                                             }
                                         })
-                                        .setTitle(temp.getTerminalName());
+                                        .setTitle(marker.getTitle());
 
                                 builder.show();
                                 return false;
