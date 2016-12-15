@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -68,7 +69,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setTitle("Commuter");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         populateDrawer();
 
         systemEvent = SystemEventController.getInstance();
@@ -174,6 +175,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mNavItems = new ArrayList<NavItem>();
         mNavItems.add(new NavItem("Home", "", R.drawable.ic_home_black_24dp));
         mNavItems.add(new NavItem("Log-out", "", R.drawable.ic_lock_open_black_24dp));
+        mNavItems.add(new NavItem("Refresh Map", "", R.drawable.ic_repeat_black_24dp));
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
@@ -196,6 +198,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     mainAct.setClass(getBaseContext(), MainActivity.class);
                     startActivity(mainAct);
                     finish();
+                }
+
+                else if (position == 2) {
+                    systemEvent.refreshMarkers(mMap, getBaseContext(), MapsActivity.this);
+                    Toast.makeText(getBaseContext(), "Map refreshed", Toast.LENGTH_LONG).show();
                 }
             }
         });

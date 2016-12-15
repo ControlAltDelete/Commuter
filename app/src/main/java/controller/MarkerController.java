@@ -2,6 +2,7 @@ package controller;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -64,7 +66,8 @@ public class MarkerController extends AsyncTask<Void, Void, Void> {
                         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                             @Override
                             public boolean onMarkerClick(Marker marker) {
-                                initializeVarForDialog(getBaseContext, parent);
+                                initializeVarForDialog(getBaseContext, parent, temp.getStatus());
+                                Log.d("STATUS", temp.getStatus() + "");
                                 builder.setView(inflatedView)
                                         .setPositiveButton("Report", new DialogInterface.OnClickListener(){
 
@@ -113,11 +116,28 @@ public class MarkerController extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
-    private void initializeVarForDialog(Context context, Context parent) {
+    private void initializeVarForDialog(Context context, Context parent, int status) {
         builder = new AlertDialog.Builder(parent);
         inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 
         inflatedView = inflater.inflate(R.layout.view_terminal_dialog, null);
+        TextView statusText = (TextView) inflatedView.findViewById(R.id.status);
 
+        switch (status)
+        {
+            case 0: statusText.setText("No reports yet");
+                    break;
+            case 1: statusText.setText("Light");
+                    statusText.setTextColor(Color.GREEN);
+                    break;
+            case 2: statusText.setText("Medium");
+                    statusText.setTextColor(Color.YELLOW);
+                    break;
+            case 3: statusText.setText("Heavy");
+                    statusText.setTextColor(Color.RED);
+                    break;
+            default: statusText.setText("Error");
+                     break;
+        }
     }
 }

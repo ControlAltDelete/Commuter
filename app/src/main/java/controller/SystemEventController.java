@@ -128,6 +128,10 @@ public class SystemEventController {
         timer.schedule(doAsynchronousTask, 0, 50000);
     }
 
+    public void refreshMarkers(final GoogleMap mMap, final Context context, final Context parent) {
+        new MarkerController(mMap, context, parent);
+    }
+
 
     private void initializeVarForDialog(Context context, Context parent) {
         items = new String[]{"Transit", "Bus", "Jeep", "UV"};
